@@ -19,6 +19,8 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://web-production-1492.up.railway.app';
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
@@ -38,7 +40,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       formData.append('username', email);
       formData.append('password', password);
 
-      const response = await axios.post('http://localhost:8000/token', formData, {
+      const response = await axios.post(`${API_BASE_URL}/token`, formData, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
@@ -52,7 +54,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
       
       // Fetch user data
-      const userResponse = await axios.get('http://localhost:8000/users/me');
+      const userResponse = await axios.get(`${API_BASE_URL}/users/me`);
       setUser(userResponse.data);
     } catch (error: any) {
       console.error('Login error:', error.response?.data || error.message);
@@ -63,7 +65,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const register = async (email: string, username: string, password: string) => {
     try {
       // First, register the user
-      const response = await axios.post('http://localhost:8000/register', {
+      const response = await axios.post(`${API_BASE_URL}/register`, {
         email,
         username,
         password
