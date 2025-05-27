@@ -1,4 +1,5 @@
-import { Typography, Box, Grid, Card, CardContent, Button } from '@mui/material';
+import { Typography, Box, Card, CardContent, Button } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
 import PriceChangeIcon from '@mui/icons-material/PriceChange';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
