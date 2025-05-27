@@ -15,6 +15,7 @@ import { Add as AddIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
+import Grid from '@mui/material/Grid';
 
 interface Product {
   id: number;
